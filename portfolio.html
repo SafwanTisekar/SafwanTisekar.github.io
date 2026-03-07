@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Safwan — Data Scientist</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f9f8f6;
+      --surface: #ffffff;
+      --border: #e8e5e0;
+      --text: #1a1917;
+      --muted: #7a766e;
+      --accent: #1a6b5a;
+      --accent-light: #e8f3f0;
+      --tag-bg: #f0eeeb;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(249,248,246,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 48px;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      padding: 160px 48px 100px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .hero-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(42px, 5vw, 62px);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-desc {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 36px;
+      max-width: 420px;
+    }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--text);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 500;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: #333; transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      padding: 12px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .btn-ghost:hover { border-color: #bbb; transform: translateY(-1px); }
+
+    /* HERO STATS */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .stat-box {
+      background: var(--surface);
+      padding: 32px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards;
+    }
+    .stat-box:nth-child(1) { animation-delay: 0.1s; }
+    .stat-box:nth-child(2) { animation-delay: 0.2s; }
+    .stat-box:nth-child(3) { animation-delay: 0.3s; }
+    .stat-box:nth-child(4) { animation-delay: 0.4s; }
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 40px;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-num span { color: var(--accent); }
+    .stat-label { font-size: 12px; color: var(--muted); font-weight: 500; }
+
+    /* SECTION LAYOUT */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 48px;
+    }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 30px;
+      letter-spacing: -0.02em;
+    }
+    .section-count {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+    }
+
+    /* PROJECTS GRID */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards;
+    }
+    .project-card:nth-child(1) { animation-delay: 0.05s; }
+    .project-card:nth-child(2) { animation-delay: 0.1s; }
+    .project-card:nth-child(3) { animation-delay: 0.15s; }
+    .project-card:nth-child(4) { animation-delay: 0.2s; }
+    .project-card:nth-child(5) { animation-delay: 0.25s; }
+    .project-card:nth-child(6) { animation-delay: 0.3s; }
+    .project-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.07); }
+
+    .project-thumb {
+      width: 100%;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .thumb-viz { background: linear-gradient(135deg, #e8f3f0 0%, #d0e8e2 100%); }
+    .thumb-ml  { background: linear-gradient(135deg, #eef0f8 0%, #dde1f5 100%); }
+    .thumb-nlp { background: linear-gradient(135deg, #f8f0e8 0%, #f5e8d0 100%); }
+
+    /* Decorative SVG inside thumb */
+    .thumb-deco {
+      position: absolute; inset: 0;
+      opacity: 0.15;
+    }
+
+    .project-body { padding: 24px; }
+    .project-type {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .project-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 19px;
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .project-desc {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+    .tag {
+      background: var(--tag-bg);
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.02em;
+    }
+    .project-footer {
+      display: flex;
+      gap: 12px;
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+    }
+    .project-link {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.2s;
+    }
+    .project-link:hover { color: var(--accent); }
+    .project-link svg { width: 13px; height: 13px; }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .skill-group {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards;
+    }
+    .skill-group:nth-child(1) { animation-delay: 0.05s; }
+    .skill-group:nth-child(2) { animation-delay: 0.1s; }
+    .skill-group:nth-child(3) { animation-delay: 0.15s; }
+    .skill-group:nth-child(4) { animation-delay: 0.2s; }
+    .skill-group-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .skill-list { display: flex; flex-direction: column; gap: 10px; }
+    .skill-item { display: flex; flex-direction: column; gap: 5px; }
+    .skill-name { font-size: 13px; font-weight: 500; color: var(--text); }
+    .skill-bar-track {
+      height: 3px;
+      background: var(--tag-bg);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .skill-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 2px;
+      width: 0;
+      transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .contact-intro {
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+    .contact-intro em { font-style: italic; color: var(--accent); }
+    .contact-sub { color: var(--muted); font-size: 15px; line-height: 1.65; }
+    .contact-links { display: flex; flex-direction: column; gap: 12px; margin-top: 28px; }
+    .contact-link-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 13.5px;
+      font-weight: 500;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .contact-link-item:hover { border-color: var(--accent); transform: translateX(3px); }
+    .contact-icon {
+      width: 32px; height: 32px;
+      background: var(--accent-light);
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .contact-icon svg { width: 15px; height: 15px; }
+    .contact-link-text { flex: 1; }
+    .contact-link-label { font-size: 10px; color: var(--muted); font-weight: 400; display: block; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted);
+      font-size: 12.5px;
+      max-width: 100%;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-left { opacity: 0; animation: fadeUp 0.7s ease 0.1s forwards; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .hero { grid-template-columns: 1fr; padding: 120px 20px 60px; gap: 48px; }
+      section { padding: 60px 20px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Safwan.</a>
+  <div class="nav-links">
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <p class="hero-label">Data Scientist & ML Engineer</p>
+    <h1>Turning data into <em>decisions.</em></h1>
+    <p class="hero-desc">
+      I build machine learning systems and data visualizations that help organizations understand complexity and act with clarity.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-box">
+      <div class="stat-num">12<span>+</span></div>
+      <div class="stat-label">Projects Completed</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">4<span>+</span></div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">8<span>+</span></div>
+      <div class="stat-label">Tools & Frameworks</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">3<span>+</span></div>
+      <div class="stat-label">Industries Served</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <h2 class="section-title">Featured Projects</h2>
+    <span class="section-count">06 projects</span>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- Project 1 -->
+    <div class="project-card">
+      <div class="project-thumb thumb-viz">
+        <svg class="thumb-deco" viewBox="0 0 300 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="60" width="30" height="100" fill="#1a6b5a"/>
+          <rect x="70" y="40" width="30" height="120" fill="#1a6b5a"/>
+          <rect x="120" y="80" width="30" height="80" fill="#1a6b5a"/>
+          <rect x="170" y="30" width="30" height="130" fill="#1a6b5a"/>
+          <rect x="220" y="55" width="30" height="105" fill="#1a6b5a"/>
+          <line x1="10" y1="170" x2="290" y2="170" stroke="#1a6b5a" stroke-width="2"/>
+        </svg>
+        📊
+      </div>
+      <div class="project-body">
+        <p class="project-type">Data Visualization</p>
+        <h3 class="project-title">Global Climate Trends Dashboard</h3>
+        <p class="project-desc">Interactive dashboard visualizing 50 years of climate data across 190+ countries, featuring animated time-series and geographic heatmaps.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span><span class="tag">Plotly</span><span class="tag">Pandas</span><span class="tag">Dash</span>
+        </div>
+        <div class="project-footer">
+          <a href="#" class="project-link">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+            Live Demo
+          </a>
+          <a href="#" class="project-link">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M5.5 2.5c0 2.5 5 2.5 5 5s-5 2.5-5 5"/><line x1="2" y1="8" x2="14" y2="8"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-card">
+      <div class="project-thumb thumb-ml">
+        <svg class="thumb-deco" viewBox="0 0 300 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="60" cy="90" r="12" fill="#4a5ab5"/>
+          <circle cx="150" cy="50" r="12" fill="#4a5ab5"/>
+          <circle cx="150" cy="130" r="12" fill="#4a5ab5"/>
+          <circle cx="240" cy="90" r="12" fill="#4a5ab5"/>
+          <line x1="60" y1="90" x2="150" y2="50" stroke="#4a5ab5" stroke-width="1.5"/>
+          <line x1="60" y1="90" x2="150" y2="130" stroke="#4a5ab5" stroke-width="1.5"/>
+          <line x1="150" y1="50" x2="240" y2="90" stroke="#4a5ab5" stroke-width="1.5"/>
+          <line x1="150" y1="130" x2="240" y2="90" stroke="#4a5ab5" stroke-width="1.5"/>
+        </svg>
+        🤖
+      </div>
+      <div class="project-body">
+        <p class="project-type">ML / AI Model</p>
+        <h3 class="project-title">Customer Churn Prediction Engine</h3>
+        <p class="project-desc">Gradient-boosted model predicting customer churn with 94% accuracy, saving an estimated $2M in annual retention costs.</p>
+        <div class="project-tags">
+          <span class="tag">XGBoost</span><span class="tag">scikit-learn</span><span class="tag">SHAP</span><span class="tag">MLflow</span>
+        </div>
+        <div class="project-footer">
+          <a href="#" class="project-link">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+            Case Study
+          </a>
+          <a href="#" class="project-link">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M5.5 2.5c0 2.5 5 2.5 5 5s-5 2.5-5 5"/><line x1="2" y1="8" x2="14" y2="8"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project-card">
+      <div class="project-thumb thumb-viz">
+        <svg class="thumb-deco" viewBox="0 0 300 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polyline points="20,150 80,100 130,120 180,60 230,80 280,30" stroke="#1a6b5a" stroke-width="2" fill="none"/>
+          <circle cx="20" cy="150" r="4" fill="#1a6b5a"/>
+          <circle cx="80" cy="100" r="4" fill="#1a6b5a"/>
+          <circle cx="130" cy="120" r="4" fill="#1a6b5a"/>
+          <circle cx="180" cy="60" r="4" fill="#1a6b5a"/>
+          <circle cx="230" cy="80" r="4" fill="#1a6b5a"/>
+          <circle cx="280" cy="30" r="4" fill="#1a6b5a"/>
+        </svg>
+        📈
+      </div>
+      <div class="project-body">
+        <p class="project-type">Data Visualization</p>
+        <h3 class="project-title">Real-Time Market Analytics</h3>
+        <p class="project-desc">Live financial data pipeline with D3.js front-end displaying volume, volatility metrics and anomaly detection overlays.</p>
+        <div class="project-tags">
+          <span class="tag">D3.js</span><span class="tag">WebSockets</span><span class="tag">FastAPI</span><span class="tag">PostgreSQL</span>
+        </div>
+        <div class="project-footer">
+          <a href="#" class="project-link">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+            Live Demo
+          </a>
+          <a href="#" class="project-link">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M5.5 2.5c0 2.5 5 2.5 5 5s-5 2.5-5 5"/><line x1="2" y1="8" x2="14" y2="8"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 4 -->
+    <div class="project-card">
+      <div class="project-thumb thumb-ml">
+        <svg class="thumb-deco" viewBox="0 0 300 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="30" y="50" width="60" height="80" rx="4" fill="#4a5ab5"/>
+          <rect x="120" y="70" width="60" height="60" rx="4" fill="#4a5ab5"/>
+          <rect x="210" y="40" width="60" height="90" rx="4" fill="#4a5ab5"/>
+          <line x1="90" y1="90" x2="120" y2="90" stroke="#4a5ab5" stroke-width="1.5" stroke-dasharray="4"/>
+          <line x1="180" y1="90" x2="210" y2="90" stroke="#4a5ab5" stroke-width="1.5" stroke-dasharray="4"/>
+        </svg>
+        🧠
+      </div>
+      <div class="project-body">
+        <p class="project-type">ML / AI Model</p>
+        <h3 class="project-title">Medical Image Classifier</h3>
+        <p class="project-desc">CNN-based model for early detection of pneumonia in chest X-rays, achieving 97.2% sensitivity on held-out test data.</p>
+        <div class="project-tags">
+          <span class="tag">PyTorch</span><span class="tag">ResNet</span><span class="tag">OpenCV</span><span class="tag">Streamlit</span>
+        </div>
+        <div class="project-footer">
+          <a href="#" class="project-link">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+            Paper
+          </a>
+          <a href="#" class="project-link">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M5.5 2.5c0 2.5 5 2.5 5 5s-5 2.5-5 5"/><line x1="2" y1="8" x2="14" y2="8"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 5 -->
+    <div class="project-card">
+      <div class="project-thumb thumb-viz">
+        <svg class="thumb-deco" viewBox="0 0 300 180" fill="none">
+          <circle cx="150" cy="90" r="70" stroke="#1a6b5a" stroke-width="1.5" stroke-dasharray="6 3"/>
+          <circle cx="150" cy="90" r="45" stroke="#1a6b5a" stroke-width="1.5"/>
+          <circle cx="150" cy="90" r="20" fill="#1a6b5a"/>
+          <line x1="150" y1="20" x2="150" y2="160" stroke="#1a6b5a" stroke-width="1"/>
+          <line x1="80" y1="90" x2="220" y2="90" stroke="#1a6b5a" stroke-width="1"/>
+        </svg>
+        🌍
+      </div>
+      <div class="project-body">
+        <p class="project-type">Data Visualization</p>
+        <h3 class="project-title">Supply Chain Network Map</h3>
+        <p class="project-desc">Interactive geospatial visualization of global supply chain flows, with bottleneck detection and alternative routing suggestions.</p>
+        <div class="project-tags">
+          <span class="tag">Kepler.gl</span><span class="tag">GeoPandas</span><span class="tag">React</span><span class="tag">Mapbox</span>
+        </div>
+        <div class="project-footer">
+          <a href="#" class="project-link">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+            Live Demo
+          </a>
+          <a href="#" class="project-link">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M5.5 2.5c0 2.5 5 2.5 5 5s-5 2.5-5 5"/><line x1="2" y1="8" x2="14" y2="8"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 6 -->
+    <div class="project-card">
+      <div class="project-thumb thumb-ml">
+        <svg class="thumb-deco" viewBox="0 0 300 180" fill="none">
+          <path d="M40 140 Q80 60 150 90 Q220 120 260 40" stroke="#4a5ab5" stroke-width="2" fill="none"/>
+          <path d="M40 140 Q80 60 150 90 Q220 120 260 40 L260 180 L40 180 Z" fill="#4a5ab5" opacity="0.15"/>
+        </svg>
+        📉
+      </div>
+      <div class="project-body">
+        <p class="project-type">ML / AI Model</p>
+        <h3 class="project-title">Energy Demand Forecaster</h3>
+        <p class="project-desc">LSTM-based time series model predicting 48-hour energy demand with MAPE under 2.1%, integrated into a utility grid management system.</p>
+        <div class="project-tags">
+          <span class="tag">TensorFlow</span><span class="tag">LSTM</span><span class="tag">Prophet</span><span class="tag">Airflow</span>
+        </div>
+        <div class="project-footer">
+          <a href="#" class="project-link">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+            Case Study
+          </a>
+          <a href="#" class="project-link">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M5.5 2.5c0 2.5 5 2.5 5 5s-5 2.5-5 5"/><line x1="2" y1="8" x2="14" y2="8"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <h2 class="section-title">Skills & Tools</h2>
+    <span class="section-count">04 categories</span>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <p class="skill-group-title">Languages</p>
+      <div class="skill-list">
+        <div class="skill-item"><span class="skill-name">Python</span><div class="skill-bar-track"><div class="skill-bar-fill" data-width="95"></div></div></div>
+        <div class="skill-item"><span class="skill-name">SQL</span><div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div></div>
+        <div class="skill-item"><span class="skill-name">R</span><div class="skill-bar-track"><div class="skill-bar-fill" data-width="70"></div></div></div>
+        <div class="skill-item"><span class="skill-name">JavaScript</span><div class="skill-bar-track"><div class="skill-bar-fill" data-width="65"></div></div></div>
+      </div>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-title">ML / AI</p>
+      <div class="skill-list">
+        <div class="skill-item"><span class="skill-name">PyTorch</span><div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div></div>
+        <div class="skill-item"><span class="skill-name">TensorFlow</span><div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div></div>
+        <div class="skill-item"><span class="skill-name">scikit-learn</span><div class="skill-bar-track"><div class="skill-bar-fill" data-width="93"></div></div></div>
+        <div class="skill-item"><span class="skill-name">XGBoost</span><div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div></div>
+      </div>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-title">Visualization</p>
+      <div class="skill-list">
+        <div class="skill-item"><span class="skill-name">Plotly / Dash</span><div class="skill-bar-track"><div class="skill-bar-fill" data-width="92"></div></div></div>
+        <div class="skill-item"><span class="skill-name">D3.js</span><div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Tableau</span><div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Matplotlib / Seaborn</span><div class="skill-bar-track"><div class="skill-bar-fill" data-width="95"></div></div></div>
+      </div>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-title">Infrastructure</p>
+      <div class="skill-list">
+        <div class="skill-item"><span class="skill-name">AWS / GCP</span><div class="skill-bar-track"><div class="skill-bar-fill" data-width="78"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Docker / K8s</span><div class="skill-bar-track"><div class="skill-bar-fill" data-width="72"></div></div></div>
+        <div class="skill-item"><span class="skill-name">MLflow</span><div class="skill-bar-track"><div class="skill-bar-fill" data-width="82"></div></div></div>
+        <div class="skill-item"><span class="skill-name">Apache Spark</span><div class="skill-bar-track"><div class="skill-bar-fill" data-width="68"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <h2 class="section-title">Get in Touch</h2>
+  </div>
+  <div class="contact-grid">
+    <div>
+      <p class="contact-intro">Let's build something <em>meaningful</em> together.</p>
+      <p class="contact-sub">I'm open to freelance projects, full-time roles, and research collaborations in data science, ML engineering, or analytics.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:safwan@example.com" class="contact-link-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="12" height="9" rx="1.5"/><path d="M2 5l6 5 6-5"/></svg>
+        </div>
+        <div class="contact-link-text">
+          <span class="contact-link-label">Email</span>
+          safwan@example.com
+        </div>
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+      </a>
+      <a href="#" class="contact-link-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M5.5 2.5c0 2.5 5 2.5 5 5s-5 2.5-5 5"/><line x1="2" y1="8" x2="14" y2="8"/></svg>
+        </div>
+        <div class="contact-link-text">
+          <span class="contact-link-label">GitHub</span>
+          github.com/safwan
+        </div>
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+      </a>
+      <a href="#" class="contact-link-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 8V11M8 6V11M11 9V11"/></svg>
+        </div>
+        <div class="contact-link-text">
+          <span class="contact-link-label">LinkedIn</span>
+          linkedin.com/in/safwan
+        </div>
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Safwan. All rights reserved.</span>
+  <span>Built with purpose.</span>
+</footer>
+
+<script>
+  // Animate skill bars when in view
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+          bar.style.width = bar.dataset.width + '%';
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.skill-group').forEach(g => observer.observe(g));
+</script>
+
+</body>
+</html>

@@ -271,6 +271,71 @@
     .project-link:hover { color: var(--accent); }
     .project-link svg { width: 13px; height: 13px; }
 
+    /* DASHBOARDS */
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .dashboard-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards;
+    }
+    .dashboard-card:nth-child(1) { animation-delay: 0.05s; }
+    .dashboard-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 24px;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    .dashboard-desc {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .dashboard-embed {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--bg);
+    }
+    .embed-placeholder {
+      padding: 40px;
+      text-align: center;
+      color: var(--muted);
+    }
+    .embed-placeholder p {
+      margin-bottom: 16px;
+      font-size: 16px;
+    }
+    .embed-placeholder ol {
+      text-align: left;
+      max-width: 400px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    .embed-placeholder li {
+      margin-bottom: 8px;
+    }
+    .embed-placeholder a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .embed-placeholder a:hover {
+      text-decoration: underline;
+    }
+    .embed-placeholder em {
+      font-style: italic;
+      font-size: 14px;
+      color: #888;
+    }
+
     /* SKILLS */
     .skills-grid {
       display: grid;
@@ -394,6 +459,7 @@
   <a href="#" class="nav-logo">Safwan.</a>
   <div class="nav-links">
     <a href="#projects">Projects</a>
+    <a href="#dashboards">Dashboards</a>
     <a href="#skills">Skills</a>
     <a href="#contact">Contact</a>
   </div>
@@ -613,6 +679,35 @@
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- DASHBOARDS -->
+<section id="dashboards">
+  <div class="section-header">
+    <h2 class="section-title">Interactive Dashboards</h2>
+    <span class="section-count">01 dashboard</span>
+  </div>
+
+  <div class="dashboard-container">
+    <div class="dashboard-card">
+      <h3 class="dashboard-title">Test Dashboard</h3>
+      <p class="dashboard-desc">Test</p>
+      <div class="dashboard-embed">
+        <!-- Replace this placeholder with your Power BI embed iframe -->
+        <div class="embed-placeholder">
+          <p>To embed your Power BI dashboard here:</p>
+          <ol>
+            <li>Go to <a href="https://app.powerbi.com" target="_blank">Power BI Service</a></li>
+            <li>Open your report</li>
+            <li>Click <strong>File > Embed report > Publish to web</strong></li>
+            <li>Copy the iframe code</li>
+            <li>Replace this placeholder with the iframe</li>
+          </ol>
+          <p><em>Note: Publishing to web makes the report publicly accessible.</em></p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 

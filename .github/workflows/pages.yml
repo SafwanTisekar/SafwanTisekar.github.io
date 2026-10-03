@@ -1,0 +1,56 @@
+name: Deploy site
+
+# Tests the site, then publishes it to GitHub Pages on every push to main.
+# One-time setup: Settings > Pages > Build and deployment > Source: GitHub Actions.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time; a newer push waits rather than cancelling one in progress.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Test the site
+        run: |
+          pip install -r requirements-dev.txt
+          pytest -q
+
+      # Publish only the site: leave out the repository files (same list as NOT_PUBLISHED
+      # in tests/test_site.py).
+      - name: Stage the site
+        run: |
+          mkdir _site
+          rsync -a --exclude .git --exclude .github --exclude tests --exclude README.md \
+            --exclude requirements-dev.txt --exclude .gitignore --exclude _site \
+            --exclude .pytest_cache --exclude __pycache__ ./ _site/
+          ls -la _site
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

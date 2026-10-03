@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dubai Property Market and Mortgage Risk | Safwan Tisekar</title>
+  <meta name="description" content="A bank risk team's view of the Dubai housing market, built end to end from Dubai Land Department open data: price index, valuation model, rental yields, stress test and a live Power BI report.">
+  <meta name="theme-color" content="#0a0d0b">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Dubai Property and Mortgage Risk Analytics">
+  <meta property="og:description" content="Price index, valuation model, stress test and a live Power BI report, built from Dubai Land Department open data.">
+  <meta property="og:image" content="https://safwantisekar.github.io/projects/dubai-property/assets/og.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/manrope-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/styles.css">
+  <script>document.documentElement.classList.add("js");</script>
+  <script src="/config.js" defer></script>
+  <script src="/main.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="nav wrap" aria-label="Site">
+    <a class="brand" href="/">Safwan <span>Tisekar</span></a>
+    <ul>
+      <li><a href="/#projects">&larr; All projects</a></li>
+      <li><a href="#report">Live report</a></li>
+      <li><a href="#story">Findings</a></li>
+      <li><a href="#build">How it's built</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+
+<!-- 1. Hero -->
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="wrap">
+    <p class="back"><a href="/#projects">&larr; All projects</a></p>
+    <p class="eyebrow">Project · data engineering, data science and BI</p>
+    <h1 id="hero-title">Dubai property market and mortgage risk</h1>
+    <p class="lede">How a UAE bank's risk team could value homes, track prices and stress-test its mortgage book, built from public data.</p>
+
+    <ul class="stats" aria-label="Headline numbers">
+      <li class="stat">
+        <span class="stat-value"><span data-kpi="txn_lines">1.77M</span></span>
+        <span class="stat-label">property transactions</span>
+        <span class="stat-value stat-value-second"><span data-kpi="rent_lines">10.5M</span></span>
+        <span class="stat-label">rent contract lines, from Dubai Land Department open data</span>
+      </li>
+      <li class="stat">
+        <span class="stat-value"><span data-kpi="sales_value">AED 668.3bn</span></span>
+        <span class="stat-label">in <span data-kpi="sales_count">211,007</span> market sales in <span data-kpi="year">2025</span>, a record year</span>
+      </li>
+      <li class="stat">
+        <span class="stat-value"><span data-kpi="avm_mdape">6.8%</span></span>
+        <span class="stat-label">typical error of the valuation model, against <span data-kpi="comps_mdape">9.9%</span> for comparable sales</span>
+      </li>
+      <li class="stat">
+        <span class="stat-value"><span data-kpi="stress_apt_20">22%</span></span>
+        <span class="stat-label">of recent ready apartment buyers would owe more than their home is worth after a 20% price fall</span>
+      </li>
+    </ul>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="#report">Open the live report</a>
+      <a class="btn btn-ghost" data-config-href="repoUrl" href="https://github.com/SafwanTisekar/dubai-property-analytics">Code on GitHub</a>
+      <a class="btn btn-ghost" data-config-href="walkthroughUrl" href="#story">5-minute tour</a>
+    </div>
+    <p class="hero-note">Data to <span data-kpi="data_as_of">25 Sep 2026</span>. Independent project, not affiliated with DLD.</p>
+  </div>
+</section>
+
+<!-- 2. Live report -->
+<section class="section" id="report" aria-labelledby="report-title">
+  <div class="wrap">
+    <h2 id="report-title">The live report</h2>
+    <p class="intro">Nine pages in Power BI: start with the Introduction, or jump to a topic with the page list on the left of the report. Use the filters at the top of each page to look at one area, property type or year.</p>
+
+    <div class="report-frame" id="report-frame">
+      <button class="report-poster" id="report-poster" type="button">
+        <img src="/projects/dubai-property/assets/report/p03.webp" alt="" width="1600" height="900">
+        <span class="report-poster-label">Load the interactive report</span>
+      </button>
+    </div>
+    <p class="report-links">
+      <a id="report-open" href="#report" target="_blank" rel="noopener" hidden>Open the report full screen</a>
+      <span class="muted" id="report-status" role="status"></span>
+    </p>
+
+    <!-- Fallback: shown when JavaScript is off, the embed fails or the licence has ended. -->
+    <div class="fallback" id="report-fallback">
+      <p class="notice">The live report is not available right now. Here are its pages as pictures, with the main findings.</p>
+      <ul class="gallery">
+        <li><figure><a class="zoomable" href="/projects/dubai-property/assets/report/p01.webp"><img src="/projects/dubai-property/assets/report/p01.webp" alt="Introduction page: what the report is, why it matters and how to use it" loading="lazy" width="1600" height="900"></a><figcaption>Introduction</figcaption></figure></li>
+        <li><figure><a class="zoomable" href="/projects/dubai-property/assets/report/p02.webp"><img src="/projects/dubai-property/assets/report/p02.webp" alt="Key terms page: property terms and the four models explained in plain language" loading="lazy" width="1600" height="900"></a><figcaption>Key terms and methods</figcaption></figure></li>
+        <li><figure><a class="zoomable" href="/projects/dubai-property/assets/report/p03.webp"><img src="/projects/dubai-property/assets/report/p03.webp" alt="Executive overview: sales value and count, prices, off-plan share and mortgage share, with market cycles since 2004" loading="lazy" width="1600" height="900"></a><figcaption>1. Executive overview</figcaption></figure></li>
+        <li><figure><a class="zoomable" href="/projects/dubai-property/assets/report/p04.webp"><img src="/projects/dubai-property/assets/report/p04.webp" alt="Financing page: how ready buyers pay, mortgage share against the reference rate, off-plan against ready" loading="lazy" width="1600" height="900"></a><figcaption>2. Financing</figcaption></figure></li>
+        <li><figure><a class="zoomable" href="/projects/dubai-property/assets/report/p05.webp"><img src="/projects/dubai-property/assets/report/p05.webp" alt="Prices page: like-for-like price index against DLD's index, falls from peak, price per square metre by zone" loading="lazy" width="1600" height="900"></a><figcaption>3. Prices</figcaption></figure></li>
+        <li><figure><a class="zoomable" href="/projects/dubai-property/assets/report/p06.webp"><img src="/projects/dubai-property/assets/report/p06.webp" alt="Rental yields page: gross yield by zone and over time, rent per square metre by bedrooms" loading="lazy" width="1600" height="900"></a><figcaption>4. Rental yields</figcaption></figure></li>
+        <li><figure><a class="zoomable" href="/projects/dubai-property/assets/report/p07.webp"><img src="/projects/dubai-property/assets/report/p07.webp" alt="Valuation page: accuracy of the valuation model against comparable sales, main drivers and flagged sales" loading="lazy" width="1600" height="900"></a><figcaption>5. Valuation model</figcaption></figure></li>
+        <li><figure><a class="zoomable" href="/projects/dubai-property/assets/report/p08.webp"><img src="/projects/dubai-property/assets/report/p08.webp" alt="Risk page: negative equity by price fall and loan-to-value, most exposed areas and the 12-month outlook" loading="lazy" width="1600" height="900"></a><figcaption>6. Risk and stress test</figcaption></figure></li>
+        <li><figure><a class="zoomable" href="/projects/dubai-property/assets/report/p09.webp"><img src="/projects/dubai-property/assets/report/p09.webp" alt="KPI guide: every headline number with its meaning, calculation and source" loading="lazy" width="1600" height="900"></a><figcaption>KPI guide</figcaption></figure></li>
+      </ul>
+      <h3>Main findings</h3>
+      <ul class="findings-list">
+        <li>A record <span data-kpi="year">2025</span>: <span data-kpi="sales_count">211,007</span> market sales worth <span data-kpi="sales_value">AED 668.3bn</span>.</li>
+        <li>In <span data-kpi="mix_year">2023</span> the median apartment price per sq m rose <span data-kpi="mix_raw">+1%</span>, but like-for-like prices rose <span data-kpi="mix_hedonic">+17%</span>.</li>
+        <li>Villa prices peaked in <span data-kpi="villa_peak">December 2025</span> and were <span data-kpi="villa_drawdown">11%</span> lower by <span data-kpi="villa_trough">July 2026</span>.</li>
+        <li>The valuation model's typical error is <span data-kpi="avm_mdape">6.8%</span>, against <span data-kpi="comps_mdape">9.9%</span> for comparable sales.</li>
+        <li>After a 20% price fall, <span data-kpi="stress_apt_20">22%</span> of recent ready apartment buyers at <span data-kpi="stress_ltv">80%</span> loan-to-value would be in negative equity (illustrative).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 3. The story -->
+<section class="section section-alt" id="story" aria-labelledby="story-title">
+  <div class="wrap">
+    <h2 id="story-title">The story in plain English</h2>
+    <div class="question glass">
+      <h3>The business question</h3>
+      <p>A bank that lends against Dubai homes needs to know three things: what a home is worth today, how fast prices are moving, and how much cushion its borrowers have if prices fall. Dubai Land Department publishes every registered sale and rent contract. This project turns those records into the answers a mortgage and real-estate risk team would use.</p>
+    </div>
+
+    <article class="finding">
+      <div class="finding-text">
+        <p class="finding-num">Finding 1</p>
+        <h3>The simple median hides what prices did</h3>
+        <p>In <span data-kpi="mix_year">2023</span> the median apartment price per sq m rose <span data-kpi="mix_raw">+1%</span>, but like-for-like prices rose <span data-kpi="mix_hedonic">+17%</span>. That year sales shifted toward cheaper areas, which held the median down while comparable homes got dearer.</p>
+        <p>So the project's price index compares like with like (a hedonic model of size, bedrooms, location and off-plan status) instead of using a median.</p>
+      </div>
+      <figure class="chart">
+        <a class="zoomable" href="/projects/dubai-property/assets/figures/price_index_mix_shift.webp"><img src="/projects/dubai-property/assets/figures/price_index_mix_shift.webp" alt="Line chart, 2011 to 2026: the like-for-like apartment index and the raw median price per square metre, both set to 100 in January 2019. The two lines diverge from 2023, with the index finishing near 176 and the raw median near 152." loading="lazy" width="1400" height="728"></a>
+        <span class="zoom-hint" aria-hidden="true">Click to enlarge</span>
+      </figure>
+    </article>
+
+    <article class="finding">
+      <div class="finding-text">
+        <p class="finding-num">Finding 2</p>
+        <h3>The index tracks DLD's own, and shows turns sooner</h3>
+        <p>Measured the same way, the project's index matches DLD's official index closely: year-on-year correlation of <span data-kpi="val_corr_min">0.91</span> to <span data-kpi="val_corr_max">0.93</span> for Dubai, apartments and villas.</p>
+        <p>It reflects turns about <span data-kpi="val_lead">6</span> months sooner. The likely reason is that DLD's monthly series appears to average the past 12 months (an inference, as DLD publishes no method), while this index uses each month's sales.</p>
+      </div>
+      <figure class="chart">
+        <a class="zoomable" href="/projects/dubai-property/assets/figures/price_index_validation.webp"><img src="/projects/dubai-property/assets/figures/price_index_validation.webp" alt="Three line charts, Dubai, apartments and villas, 2012 to 2024: year-on-year growth of this project's index, its 12-month average and DLD's official index. The 12-month average and DLD's index move closely together." loading="lazy" width="1400" height="537"></a>
+        <span class="zoom-hint" aria-hidden="true">Click to enlarge</span>
+      </figure>
+    </article>
+
+    <article class="finding">
+      <div class="finding-text">
+        <p class="finding-num">Finding 3</p>
+        <h3>2026: villas have turned, apartments are flat</h3>
+        <p>Villa prices peaked in <span data-kpi="villa_peak">December 2025</span> and were <span data-kpi="villa_drawdown">11%</span> lower by <span data-kpi="villa_trough">July 2026</span>. On a year earlier, apartment prices are <span data-kpi="apt_yoy">−0.2%</span> and Dubai overall <span data-kpi="dubai_yoy">+1.0%</span>. Treat the latest months as provisional: they are revised as late registrations arrive.</p>
+        <p>With interest rates held flat, the 12-month outlook for Dubai is <span data-kpi="fc_central">+4.6%</span>, but the 80% range runs from <span data-kpi="fc_lo">−5%</span> to <span data-kpi="fc_hi">+15%</span>, so a further fall is well within it.</p>
+      </div>
+      <figure class="chart">
+        <a class="zoomable" href="/projects/dubai-property/assets/figures/price_index_levels.webp"><img src="/projects/dubai-property/assets/figures/price_index_levels.webp" alt="Line chart, 2011 to 2026: like-for-like price index for Dubai, apartments and villas, January 2019 equals 100. Villas rise to about 244 in December 2025 and fall back to about 220; apartments and Dubai flatten near 176 and 182." loading="lazy" width="1400" height="756"></a>
+        <span class="zoom-hint" aria-hidden="true">Click to enlarge</span>
+      </figure>
+    </article>
+
+    <article class="finding">
+      <div class="finding-text">
+        <p class="finding-num">Finding 4</p>
+        <h3>The valuation model beats the comparables a valuer would use</h3>
+        <p>The model was trained on sales up to 2023 and tested on <span data-kpi="avm_test_sales">275,702</span> sales from 2025 on, which it never saw. Its typical error is <span data-kpi="avm_mdape">6.8%</span>, and <span data-kpi="avm_hit10">65%</span> of its values land within 10% of the sale price.</p>
+        <p>The usual benchmark, the median price per sq m of similar recent sales, scores <span data-kpi="comps_mdape">9.9%</span> and <span data-kpi="comps_hit10">50%</span>. For villas the two are close: villa communities repeat a few layouts, so comparables already work well there.</p>
+      </div>
+      <figure class="chart">
+        <a class="zoomable" href="/projects/dubai-property/assets/figures/avm_accuracy_by_segment.webp"><img src="/projects/dubai-property/assets/figures/avm_accuracy_by_segment.webp" alt="Bar chart of median absolute error by segment for four methods. The valuation model (LightGBM) has the lowest error in every segment except villas, where comparable sales are slightly lower." loading="lazy" width="1400" height="896"></a>
+        <span class="zoom-hint" aria-hidden="true">Click to enlarge</span>
+      </figure>
+    </article>
+
+    <article class="finding">
+      <div class="finding-text">
+        <p class="finding-num">Finding 5</p>
+        <h3>A borrower's cushion is their deposit</h3>
+        <p>Recent buyers bought into a rising market, so almost none owe more than their home is worth today. But at an assumed <span data-kpi="stress_ltv">80%</span> loan-to-value, a 20% price fall would put <span data-kpi="stress_apt_20">22%</span> of recent ready apartment buyers (<span data-kpi="stress_villa_20">20%</span> of villa buyers) in negative equity, and a 30% fall <span data-kpi="stress_apt_30">73%</span> (<span data-kpi="stress_villa_30">64%</span>).</p>
+        <p>This is an illustrative test on assumed loans, not a forecast of losses.</p>
+      </div>
+      <figure class="chart">
+        <a class="zoomable" href="/projects/dubai-property/assets/figures/stress_heatmap.webp"><img src="/projects/dubai-property/assets/figures/stress_heatmap.webp" alt="Two heat maps, apartments and villas: share of recent ready buyers in negative equity by price fall (0 to 50%) and assumed loan-to-value (50 to 85%). At 80% loan-to-value the share jumps from near zero at a 10% fall to about one in five at 20%." loading="lazy" width="1400" height="611"></a>
+        <span class="zoom-hint" aria-hidden="true">Click to enlarge</span>
+      </figure>
+    </article>
+  </div>
+</section>
+
+<!-- 4. How it's built -->
+<section class="section" id="build" aria-labelledby="build-title">
+  <div class="wrap">
+    <h2 id="build-title">How it's built</h2>
+    <p class="intro">One command, <code>make pipeline</code>, rebuilds everything from the raw files: about 5 GB of CSVs into a PostgreSQL database, then models, then the views Power BI reads.</p>
+
+    <figure class="architecture">
+      <ol class="flow" aria-label="Data flow from sources to this website">
+        <li><strong>Sources</strong><span>DLD transactions and Ejari rents, US Fed Funds rate</span></li>
+        <li><strong>Load</strong><span>Python loads raw CSVs with Postgres COPY</span></li>
+        <li><strong>Bronze</strong><span>Raw text tables, row counts reconciled to the files</span></li>
+        <li><strong>Silver and gold</strong><span>dbt cleans, types and flags data quality issues, then builds facts and dimensions</span></li>
+        <li><strong>Models</strong><span>Python: price index, valuation model, yields, stress test, forecast</span></li>
+        <li><strong>Reporting views</strong><span>dbt builds the only views Power BI may read</span></li>
+        <li><strong>Power BI</strong><span>Semantic model and nine report pages, published to the web</span></li>
+        <li><strong>This site</strong><span>Numbers written from the database at build time</span></li>
+      </ol>
+      <figcaption class="sr-only">Pipeline: sources, loading, bronze, silver and gold, models, reporting views, Power BI, website.</figcaption>
+    </figure>
+
+    <h3>Tools</h3>
+    <ul class="pills" aria-label="Tools used">
+      <li>Python 3.11</li><li>uv</li><li>PostgreSQL 18</li><li>dbt Core</li><li>psycopg 3 (COPY)</li>
+      <li>Polars</li><li>LightGBM</li><li>statsmodels (SARIMAX)</li><li>scikit-learn</li><li>SHAP</li>
+      <li>Optuna</li><li>pytest</li><li>ruff</li><li>GitHub Actions</li><li>Power BI (DAX, TMDL, PBIR)</li>
+      <li>GitHub Pages</li>
+    </ul>
+
+    <div class="two-col">
+      <div>
+        <h3>Data quality and testing</h3>
+        <ul class="ticks">
+          <li><strong>Every push is tested</strong> in GitHub Actions: the full pipeline runs on small real extracts of the DLD files, with dbt tests on every model.</li>
+          <li><strong>Every report number is reconciled.</strong> Each headline figure is computed twice, once from the cleaned data and once from the views Power BI reads, and the build fails if they differ.</li>
+          <li><strong>The totals match DLD's.</strong> Yearly registered values agree with DLD's published figures within about 1%.</li>
+          <li><strong>No peeking at the future.</strong> A test rewrites every later sale and checks the valuation model's inputs do not change. Models are tested on later years only, never on a random split.</li>
+          <li><strong>Problems are flagged, not deleted.</strong> Rows that fail a quality rule keep a flag and a logged reason, so every number can be traced.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Limitations</h3>
+        <ul class="plain">
+          <li>The UAE interbank rate (EIBOR) is not loaded yet, so the US Fed Funds rate stands in for it (the dirham is pegged to the dollar).</li>
+          <li>The forecast's rate effect comes out positive and not statistically significant: the 2022 rate rises coincided with the boom.</li>
+          <li>The stress test is illustrative: loans are assumed from the central bank's caps and held at their starting amount.</li>
+          <li>The latest index months are provisional and change as late registrations arrive.</li>
+          <li>DLD doesn't say whether a villa's area is the plot or the house, so villa and apartment prices per sq m are not compared.</li>
+          <li>Building age and developer are not in the data used, and all prices are in nominal dirhams.</li>
+          <li><span data-kpi="data_as_of">25 Sep 2026</span> is the data cut-off, so 2026 is a part year.</li>
+        </ul>
+      </div>
+    </div>
+    <p><a data-config-href="repoUrl" href="https://github.com/SafwanTisekar/dubai-property-analytics">Read the code, model cards and documentation on GitHub</a></p>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-row">
+      <p class="footer-name">Safwan Tisekar · <span data-year>2026</span></p>
+      <nav aria-label="Footer">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a data-config-href="githubProfileUrl" href="https://github.com/SafwanTisekar">GitHub</a></li>
+          <li><a href="#top">Back to top</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-notes">
+      <p>Data: Dubai Land Department, CC BY 4.0. Area locations © OpenStreetMap contributors (ODbL). Data to <span data-kpi="data_as_of">25 Sep 2026</span>.</p>
+      <p>Independent project, not affiliated with DLD. Not investment or lending advice.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

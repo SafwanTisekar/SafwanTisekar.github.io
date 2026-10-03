@@ -1,0 +1,157 @@
+{
+ "about": "Numbers shown on the site pages, written by `make site` from the database. Do not edit by hand.",
+ "data_as_of": "25 Sep 2026",
+ "attribution": "Dubai Land Department, CC BY 4.0",
+ "kpis": {
+  "data_as_of": {
+   "value": "25 Sep 2026",
+   "label": "Data snapshot",
+   "source": "rpt.report_info"
+  },
+  "year": {
+   "value": "2025",
+   "label": "Latest full year",
+   "source": "rpt.report_info"
+  },
+  "txn_lines": {
+   "value": "1.77M",
+   "label": "DLD transaction lines in scope (2004 on)",
+   "source": "gold.fct_transaction"
+  },
+  "rent_lines": {
+   "value": "10.5M",
+   "label": "Ejari rent contract lines in scope",
+   "source": "gold.fct_rent_contract"
+  },
+  "sales_count": {
+   "value": "211,007",
+   "label": "Market sales 2025",
+   "source": "silver market sales (kpi_reconciliation, = rpt)"
+  },
+  "sales_value": {
+   "value": "AED 668.3bn",
+   "label": "Market sales value 2025",
+   "source": "silver market sales (kpi_reconciliation, = rpt)"
+  },
+  "avm_mdape": {
+   "value": "6.8%",
+   "label": "lightgbm median absolute % error",
+   "source": "rpt.avm_performance, Test / Overall (avm_model_card.md)"
+  },
+  "avm_hit10": {
+   "value": "65%",
+   "label": "lightgbm share within ±10%",
+   "source": "rpt.avm_performance, Test / Overall (avm_model_card.md)"
+  },
+  "comps_mdape": {
+   "value": "9.9%",
+   "label": "comps median absolute % error",
+   "source": "rpt.avm_performance, Test / Overall (avm_model_card.md)"
+  },
+  "comps_hit10": {
+   "value": "50%",
+   "label": "comps share within ±10%",
+   "source": "rpt.avm_performance, Test / Overall (avm_model_card.md)"
+  },
+  "avm_test_sales": {
+   "value": "275,702",
+   "label": "AVM test sales (2025 on)",
+   "source": "rpt.avm_score"
+  },
+  "stress_apt_20": {
+   "value": "22%",
+   "label": "Apartments: share in negative equity after a 20% fall",
+   "source": "rpt.stress_grid, Ready, assumed LTV 80% (stress_test.md)"
+  },
+  "stress_apt_30": {
+   "value": "73%",
+   "label": "Apartments: share in negative equity after a 30% fall",
+   "source": "rpt.stress_grid, Ready, assumed LTV 80% (stress_test.md)"
+  },
+  "stress_villa_20": {
+   "value": "20%",
+   "label": "Villas / Townhouses: share in negative equity after a 20% fall",
+   "source": "rpt.stress_grid, Ready, assumed LTV 80% (stress_test.md)"
+  },
+  "stress_villa_30": {
+   "value": "64%",
+   "label": "Villas / Townhouses: share in negative equity after a 30% fall",
+   "source": "rpt.stress_grid, Ready, assumed LTV 80% (stress_test.md)"
+  },
+  "stress_ltv": {
+   "value": "80%",
+   "label": "Assumed loan-to-value",
+   "source": "rpt.stress_grid, Ready, assumed LTV 80% (stress_test.md)"
+  },
+  "fc_central": {
+   "value": "+4.6%",
+   "label": "12-month outlook, central",
+   "source": "rpt.forecast, Dubai, rates flat (forecast.md)"
+  },
+  "fc_lo": {
+   "value": "−5%",
+   "label": "12-month outlook, 80% band low",
+   "source": "rpt.forecast, Dubai, rates flat (forecast.md)"
+  },
+  "fc_hi": {
+   "value": "+15%",
+   "label": "12-month outlook, 80% band high",
+   "source": "rpt.forecast, Dubai, rates flat (forecast.md)"
+  },
+  "apt_yoy": {
+   "value": "−0.2%",
+   "label": "Apartments index, year on year (Aug 2026)",
+   "source": "rpt.price_index, latest complete month"
+  },
+  "dubai_yoy": {
+   "value": "+1.0%",
+   "label": "Dubai (all residential) index, year on year (Aug 2026)",
+   "source": "rpt.price_index, latest complete month"
+  },
+  "villa_peak": {
+   "value": "December 2025",
+   "label": "Villa index peak",
+   "source": "ml.fct_price_index, villas (price_index.md episodes)"
+  },
+  "villa_trough": {
+   "value": "July 2026",
+   "label": "Villa index trough so far",
+   "source": "ml.fct_price_index, villas (price_index.md episodes)"
+  },
+  "villa_drawdown": {
+   "value": "11%",
+   "label": "Villa fall, peak to trough",
+   "source": "ml.fct_price_index, villas (price_index.md episodes)"
+  },
+  "mix_year": {
+   "value": "2023",
+   "label": "Year the raw median understated growth most",
+   "source": "price_index.md mix table (raw yearly median vs hedonic annual average)"
+  },
+  "mix_raw": {
+   "value": "+1%",
+   "label": "Apartment raw median change 2023",
+   "source": "price_index.md mix table (raw yearly median vs hedonic annual average)"
+  },
+  "mix_hedonic": {
+   "value": "+17%",
+   "label": "Apartment like-for-like change 2023",
+   "source": "price_index.md mix table (raw yearly median vs hedonic annual average)"
+  },
+  "val_corr_min": {
+   "value": "0.91",
+   "label": "Aligned YoY correlation with DLD, lowest",
+   "source": "artifacts/hedonic_index/diagnostics.json validation (price_index.md)"
+  },
+  "val_corr_max": {
+   "value": "0.93",
+   "label": "Aligned YoY correlation with DLD, highest",
+   "source": "artifacts/hedonic_index/diagnostics.json validation (price_index.md)"
+  },
+  "val_lead": {
+   "value": "6",
+   "label": "Months by which our monthly index turns before DLD's",
+   "source": "artifacts/hedonic_index/diagnostics.json validation (price_index.md)"
+  }
+ }
+}

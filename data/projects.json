@@ -1,0 +1,39 @@
+{
+ "about": "The project cards on the home page, in display order. `make site` renders them into index.html between the projects markers. To add a project: add an entry here, add its page under projects/<slug>/, then run make site. A number's `kpi` and any {key} in its `text` are keys of data/site.json.",
+ "projects": [
+  {
+   "slug": "dubai-property",
+   "title": "Dubai Property Market & Mortgage Risk",
+   "url": "/projects/dubai-property/",
+   "thumbnail": "/projects/dubai-property/assets/report/p03.webp",
+   "thumbnail_alt": "Executive overview page of the Power BI report: sales value, prices, off-plan and mortgage shares, and market cycles since 2004",
+   "summary": [
+    "How a UAE bank's risk team could value homes, track prices and stress-test its mortgage book, built from Dubai Land Department open data.",
+    "An end-to-end pipeline from raw files to a published Power BI report, with a like-for-like price index, a valuation model and a stress test."
+   ],
+   "numbers": [
+    {
+     "kpi": "sales_value",
+     "text": "of market sales in {year}"
+    },
+    {
+     "kpi": "avm_mdape",
+     "text": "typical valuation error, against {comps_mdape} for comparable sales"
+    },
+    {
+     "kpi": "stress_apt_20",
+     "text": "of recent ready apartment buyers under water after a 20% price fall"
+    }
+   ],
+   "tags": [
+    "PostgreSQL",
+    "dbt",
+    "Python",
+    "LightGBM",
+    "Power BI",
+    "GitHub Actions"
+   ],
+   "attribution": "Data: Dubai Land Department, CC BY 4.0"
+  }
+ ]
+}
